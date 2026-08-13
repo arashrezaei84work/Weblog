@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <main class="main-content container">
+        <div class="page-with-sidebar">
+            <article class="single-post main-feed">
+                
+                <header class="post-header">
+                    {% for cat in post.category.all %}
+                    <span class="tag-badge">{{cat.name}}</span>
+                    {% endfor %}
+                    <h1>{{post.title}}</h1>
+                    
+                    <!-- اطلاعات اضافه شده: لینک پروفایل، ویو، کامنت -->
+                    <div class="post-meta-info">
+                        <span><a href="author.html" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author}}</a></span>
+                        <span>📅{{post.published_date|date:"M d Y"}}</span>
+                        <span>👁️ {{post.post_view}}</span>
+                        <span>💬 ۳ دیدگاه</span>
+                    </div>
+                </header>
+
+                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=600&fit=crop" alt="کاور مقاله" class="post-cover">
+
+                <div class="post-body">
+                    <p>{{post.content}}</p>
+                </div>
+
+                <!-- بخش نظرات -->
+                <section class="comments-section">
+                    <h3>نظرات کاربران (۳)</h3>
+                    
+                    <!-- فرم ثبت نظر -->
+                    <div class="comment-form">
+                        <h4 style="margin-bottom: 15px;">دیدگاه خود را بنویسید</h4>
+                        <form action="#" method="POST">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>نام شما</label>
+                                    <input type="text" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>ایمیل</label>
+                                    <input type="email" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>متن دیدگاه</label>
+                                <textarea rows="4" class="form-control" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">ارسال دیدگاه</button>
+                        </form>
+                    </div>
+
+                    <!-- لیست نظرات -->
+                    <div class="comments-list">
+                        <!-- کامنت اول -->
+                        <div class="comment-box">
+                            <div class="comment-avatar">م</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="comment-author">محمد امیری</span>
+                                    <span class="comment-date">۱۴ مهر ۱۴۰۲</span>
+                                </div>
+                                <p class="comment-text">مقاله بسیار عالی و مفیدی بود. آیا در ادامه آموزش پروژه محور هم قرار می‌دهید؟</p>
+                            </div>
+                        </div>
+
+                        <!-- کامنت دوم (پاسخ نویسنده) -->
+                        <div class="comment-box" style="background: #eef2ff; border-color: #c7d2fe; margin-right: 40px;">
+                            <div class="comment-avatar" style="background: var(--primary-color); color: white;">ع</div>
+                            <div class="comment-content">
+                                <div class="comment-header">
+                                    <span class="comment-author">علی رضایی (نویسنده)</span>
+                                    <span class="comment-date">۱۵ مهر ۱۴۰۲</span>
+                                </div>
+                                <p class="comment-text">سلام محمد عزیز. بله، در پست‌های بعدی یک پروژه وبلاگ با جنگو را قدم به قدم پیاده‌سازی می‌کنیم.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </article>
+            <!-- سایدبار دسته‌بندی‌ها کنار مقاله تکی -->
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3 class="widget-title">دسته‌بندی‌ها</h3>
+                    <ul class="category-list">
+                        <li><a href="#">برنامه‌نویسی <span class="category-count">۱۵</span></a></li>
+                        <li><a href="#">پایتون و جنگو <span class="category-count">۱۲</span></a></li>
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+{% endblock %}

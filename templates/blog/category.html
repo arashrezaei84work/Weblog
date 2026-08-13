@@ -1,0 +1,10 @@
+{% load static %}
+                <!-- ابزارک دسته‌بندی‌ها -->
+                <div class="widget">
+                    <h3 class="widget-title">دسته‌بندی‌ها</h3>
+                    <ul class="category-list">
+                        {% for cat,count in cats.items %}
+                         <li><a href="{% url "blog:category" cat=cat.name %}">{{cat.name}}<span class="category-count">{{count}}</span></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>

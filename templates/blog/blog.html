@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+{% block content %}
+    <main class="main-content container">
+        <div class="page-header">
+            <h1>آرشیو مقالات</h1>
+            <p style="color: var(--text-muted); margin-top: 10px;">تمامی مقالات منتشر شده را در اینجا جستجو کنید</p>
+        </div>
+
+        <div class="page-with-sidebar page-with-search">
+
+            <!-- جستجو: در دسکتاپ بالای سایدبار، در موبایل بالای صفحه -->
+            <div class="widget search-widget-top">
+                <h3 class="widget-title">جستجو در مقالات</h3>
+                <form action="#" method="GET" class="search-form-widget">
+                    <input type="text" name="s" placeholder="کلمه کلیدی..." class="search-input" required>
+                    <button type="submit" class="search-submit-btn">🔍</button>
+                </form>
+            </div>
+
+            <div class="main-feed">
+                <h2 class="section-title">تازه‌ترین مقالات</h2>
+                <div class="post-grid">
+                    {% for post in posts %}
+                    <article class="card">
+                        <img src="{{post.image.url}}" alt="post" class="card-img">
+                        <div class="card-content">
+                            <div class="card-meta">
+                                {% for cat in post.category.all %}
+                                <span class="card-category">{{cat.name}}</span>{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                <span><a href="author.html">✍️ {{post.author}}</a></span>
+                            </div>
+                            <h3 class="card-title"><a href="{% url  'blog:single' post.slug %}">{{post.title}}</a></h3>
+                            <p class="card-excerpt">{{post.content|truncatechars:35}}</p>
+                            <div class="card-footer">
+                                <span>{{post.published_date|date:'M d Y'}}</span>
+                                <a href="{% url  'blog:single' post.slug  %}" class="read-more">ادامه مطلب ←</a>
+                            </div>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <p style="color: var(--text-muted);">هنوز مقاله‌ای منتشر نشده است.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- سایدبار (سمت چپ) -->
+            <aside class="sidebar">
+
+                {% categories %}
+                <!-- ابزارک محبوب‌ترین‌ها (اختیاری برای زیبایی) -->
+                <div class="widget">
+                    <h3 class="widget-title">محبوب‌ترین مقالات</h3>
+                    <ul class="category-list">
+                        <li><a href="#" style="font-size: 0.9rem;">راهنمای جامع یادگیری پایتون</a></li>
+                        <li><a href="#" style="font-size: 0.9rem;">چگونه یک رزومه خوب بنویسیم؟</a></li>
+                        <li><a href="#" style="font-size: 0.9rem;">معرفی بهترین افزونه‌های VS Code</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+{% endblock  %}

@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وبلاگ من | خانه</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+    <!-- هدر -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="{% url "website:home" %}" class="logo">لوگووبلاگ</a>
+            <button class="mobile-menu-btn" id="menuToggle">☰</button>
+            <div class="nav-links">
+                <a href="{% url "website:home" %}" style="color: var(--primary-color);">خانه</a>
+                <a href="{% url "blog:blog" %}">مقالات</a>
+                <a href="{% url "website:about" %}">درباره ما</a>
+                <a href="{% url "website:contact" %}">تماس با من</a>
+                <a href="login.html" class="btn btn-sm">ورود / ثبت‌نام</a>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}
+    
+    {% endblock  %}
+
+    <!-- فوتر -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 تمامی حقوق برای این وبلاگ محفوظ است. طراحی با ❤️</p>
+        </div>
+    </footer>
+<script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.querySelector('.nav-links');
+    if(menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+</script>
+</body>
+</html>

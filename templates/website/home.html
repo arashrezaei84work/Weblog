@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- بخش معرفی درباره وبلاگ -->
+    <section class="hero">
+        <div class="container">
+            <h1>درباره این وبلاگ</h1>
+            <p>به وبلاگ من خوش آمدید! اینجا محلی است برای یادگیری، اشتراک‌گذاری تجربیات و بررسی جدیدترین تکنولوژی‌های دنیای برنامه‌نویسی. هدف من کمک به رشد توسعه‌دهندگان و ایجاد یک کامیونیتی قدرتمند است.</p>
+        </div>
+    </section>
+
+    <!-- محتوای اصلی به همراه سایدبار -->
+    <main class="main-content container">
+        <div class="page-with-sidebar">
+            
+            <!-- بخش مقالات (سمت راست) -->
+            <div class="main-feed">
+                <h2 class="section-title">تازه‌ترین مقالات</h2>
+                <div class="post-grid">
+                    <!-- کارت مقاله -->
+                    {% for post in posts %}
+                    <article class="card">
+                        <img src="{{post.image.url}}" alt="post" class="card-img">
+                        <div class="card-content">
+                            <div class="card-meta">
+                                {% for cat in post.category.all %}
+                                <span class="card-category">{{cat.name}}</span>{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                <span><a href="author.html">✍️ {{post.author}}</a></span>
+                            </div>
+                            <h3 class="card-title"><a href="{% url  'blog:single' post.slug %}">{{post.title}}</a></h3>
+                            <p class="card-excerpt">{{post.content|truncatechars:35}}</p>
+                            <div class="card-footer">
+                                <span>{{post.published_date|date:'M d Y'}}</span>
+                                <a href="{% url  'blog:single' post.slug  %}" class="read-more">ادامه مطلب ←</a>
+                        </div>
+                        </div>
+                    </article>
+                    {% empty %}
+                    <p style="color: var(--text-muted);">هنوز مقاله‌ای منتشر نشده است.</p>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+
+            <!-- سایدبار (سمت چپ) -->
+            <aside class="sidebar">
+
+                <!-- ابزارک محبوب‌ترین‌ها (اختیاری برای زیبایی) -->
+                <div class="widget">
+                    <h3 class="widget-title">آخرین مقالات</h3>
+                    <ul class="category-list">
+                        {% for post in posts %}
+                        <li><a href="{% url "blog:single" post.slug %}" style="font-size: 0.9rem;">{{post.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+{% endblock %}

@@ -1,0 +1,135 @@
+/* Custom 404 Page Stylesheet */
+
+:root {
+    --bg-color: #1a1614;
+    --card-bg: rgba(35, 29, 26, 0.85);
+    --primary-accent: #c7a17a;
+    --primary-hover: #b38e68;
+    --text-primary: #f5f0eb;
+    --text-muted: #a0958d;
+    --border-color: rgba(199, 161, 122, 0.2);
+}
+
+body.error-page-body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(199, 161, 122, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(199, 161, 122, 0.05) 0%, transparent 40%);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Glassmorphism Error Card */
+.error-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    max-width: 580px;
+    width: 100%;
+}
+
+/* Graphic Illustration Styles */
+.error-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.error-digit {
+    font-size: 5.5rem;
+    font-weight: 800;
+    color: var(--primary-accent);
+    line-height: 1;
+    text-shadow: 0 4px 20px rgba(199, 161, 122, 0.25);
+}
+
+.error-icon-wrapper {
+    width: 75px;
+    height: 75px;
+    background: rgba(199, 161, 122, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: floatAnimation 3s ease-in-out infinite;
+}
+
+.error-svg {
+    width: 40px;
+    height: 40px;
+    stroke: var(--primary-accent);
+}
+
+/* Subtle Floating Animation */
+@keyframes floatAnimation {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* Typography Styles */
+.error-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.error-description {
+    font-size: 0.98rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Action Buttons Styles */
+.btn-primary-custom {
+    background-color: var(--primary-accent);
+    color: #1a1614;
+    padding: 10px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid var(--primary-accent);
+}
+
+.btn-primary-custom:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: #1a1614;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(199, 161, 122, 0.25);
+}
+
+.btn-secondary-custom {
+    background-color: transparent;
+    color: var(--text-primary);
+    padding: 10px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--primary-accent);
+    border-color: var(--primary-accent);
+    transform: translateY(-2px);
+}
