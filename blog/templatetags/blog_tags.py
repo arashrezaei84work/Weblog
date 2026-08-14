@@ -12,3 +12,8 @@ def categories():
     for name in cats:
         cat_dict[name] = post.filter(category=name).count
     return {'cats' : cat_dict}
+
+@register.inclusion_tag('blog/latespost.html')
+def latespost(args=6):
+    posts = Post.objects.filter(status=1)[:args]
+    return {'posts':posts}

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load blog_tags %}
 {% block content %}
     <main class="main-content container">
         <div class="page-with-sidebar">
@@ -13,7 +14,7 @@
                     
                     <!-- اطلاعات اضافه شده: لینک پروفایل، ویو، کامنت -->
                     <div class="post-meta-info">
-                        <span><a href="author.html" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author}}</a></span>
+                        <span><a href="author.html" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author.get_full_name}}</a></span>
                         <span>📅{{post.published_date|date:"M d Y"}}</span>
                         <span>👁️ {{post.post_view}}</span>
                         <span>💬 ۳ دیدگاه</span>
@@ -83,13 +84,8 @@
             </article>
             <!-- سایدبار دسته‌بندی‌ها کنار مقاله تکی -->
             <aside class="sidebar">
-                <div class="widget">
-                    <h3 class="widget-title">دسته‌بندی‌ها</h3>
-                    <ul class="category-list">
-                        <li><a href="#">برنامه‌نویسی <span class="category-count">۱۵</span></a></li>
-                        <li><a href="#">پایتون و جنگو <span class="category-count">۱۲</span></a></li>
-                    </ul>
-                </div>
+                {% categories %}
+                {% latespost %}
             </aside>
 
         </div>
