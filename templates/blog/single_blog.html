@@ -14,7 +14,7 @@
                     
                     <!-- اطلاعات اضافه شده: لینک پروفایل، ویو، کامنت -->
                     <div class="post-meta-info">
-                        <span><a href="author.html" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author.get_full_name}}</a></span>
+                        <span><a href="{% url "accounts:author" %}" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author.get_full_name}}</a></span>
                         <span>📅{{post.published_date|date:"M d Y"}}</span>
                         <span>👁️ {{post.post_view}}</span>
                         <span>💬 ۳ دیدگاه</span>

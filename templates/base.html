@@ -20,7 +20,7 @@
                 <a href="{% url "blog:blog" %}">مقالات</a>
                 <a href="{% url "website:about" %}">درباره ما</a>
                 <a href="{% url "website:contact" %}">تماس با من</a>
-                <a href="login.html" class="btn btn-sm">ورود / ثبت‌نام</a>
+                <a href="{% url "accounts:login" %}" class="btn btn-sm">ورود / ثبت‌نام</a>
             </div>
         </div>
     </nav>

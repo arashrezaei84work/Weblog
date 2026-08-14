@@ -1,27 +1,6 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وبلاگ من | ورود به سایت</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
-    <link rel="stylesheet" href="statics/style.css">
-</head>
-<body>
-
-    <nav class="navbar">
-        <div class="container">
-            <a href="home.html" class="logo">لوگووبلاگ</a>
-            <div class="nav-links">
-                <a href="home.html">خانه</a>
-                <a href="blog.html">مقالات</a>
-                <a href="about.html">درباره من</a>
-                <a href="contact.html">تماس با من</a>
-                <a href="login.html" class="btn btn-sm">ورود / ثبت‌نام</a>
-            </div>
-        </div>
-    </nav>
-
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
     <main class="main-content container">
         <div class="auth-wrapper">
             <div class="auth-card">
@@ -53,11 +32,4 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2024 تمامی حقوق برای این وبلاگ محفوظ است. طراحی با ❤️</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+{% endblock %}
