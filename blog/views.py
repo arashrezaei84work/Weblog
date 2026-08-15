@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Category
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+@login_required
 def blog_view(request,**kwargs):
     if kwargs.get('cat') != None:
         posts = posts.filter(category__name=kwargs['cat'])
@@ -9,6 +10,7 @@ def blog_view(request,**kwargs):
     context = {'posts':posts}
     return render(request, 'blog/blog.html', context)
 
+@login_required
 def single_view(request,slug):
     post = get_object_or_404(Post, slug=slug)
     post.post_view += 1
@@ -16,7 +18,7 @@ def single_view(request,slug):
     context = {'post':post}
     return render(request, 'blog/single_blog.html',context)
 
-
+@login_required
 def category_view(request,cat):
     posts = Post.objects.filter(status=1)
     posts = posts.filter(category__name=cat)
