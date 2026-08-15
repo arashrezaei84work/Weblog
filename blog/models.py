@@ -17,6 +17,7 @@ class Post(models.Model):
     category = models.ManyToManyField(Category)
     image = models.ImageField(upload_to='blog/',default='default.webp')
     post_view = models.PositiveIntegerField(default=0)
+    likes = models.PositiveIntegerField(default=0)
     status = models.BooleanField(default=False)
     author = models.ForeignKey(User,on_delete=models.SET_NULL, null=True)
     published_date = models.DateTimeField(null=True)

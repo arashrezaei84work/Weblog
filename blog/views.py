@@ -23,3 +23,6 @@ def category_view(request,cat):
     context = {'posts':posts}
     return render(request,'blog/blog.html',context)
 
+def like_view(request,cat):
+    pass
+

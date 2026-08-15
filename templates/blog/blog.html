@@ -35,9 +35,20 @@
                             <h3 class="card-title"><a href="{% url  'blog:single' post.slug %}">{{post.title}}</a></h3>
                             <p class="card-excerpt">{{post.content|truncatechars:35}}</p>
                             <div class="card-footer">
-                                <span>{{post.published_date|date:'M d Y'}}</span>
+                                <!-- Grouping date and like count together -->
+                                <div class="footer-info">
+                                    <span>{{post.published_date|date:'M d Y'}}</span>
+                                    
+                                    <!-- Like count display -->
+                                    <span class="card-like-count">
+                                        <span class="heart-icon">❤️</span> 
+                                        <span>۱۲</span> 
+                                    </span>
+                                </div>
+                                
                                 <a href="{% url  'blog:single' post.slug  %}" class="read-more">ادامه مطلب ←</a>
                             </div>
+
                         </div>
                     </article>
                     {% empty %}

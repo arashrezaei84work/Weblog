@@ -18,6 +18,10 @@
                         <span>📅{{post.published_date|date:"M d Y"}}</span>
                         <span>👁️ {{post.post_view}}</span>
                         <span>💬 ۳ دیدگاه</span>
+                        <button class="post-like-btn" id="post-like">
+                            <span>❤️</span>
+                            <span>۲</span>
+                        </button>
                     </div>
                 </header>
 
@@ -64,10 +68,18 @@
                                     <span class="comment-date">۱۴ مهر ۱۴۰۲</span>
                                 </div>
                                 <p class="comment-text">مقاله بسیار عالی و مفیدی بود. آیا در ادامه آموزش پروژه محور هم قرار می‌دهید؟</p>
+                                
+                                <!-- Comment Like Area -->
+                                <div class="comment-actions">
+                                    <button class="comment-like-btn">
+                                        <span>❤️</span>
+                                        <span>۲</span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- کامنت دوم (پاسخ نویسنده) -->
+                        <!-- Second Comment (Author Reply) -->
                         <div class="comment-box" style="background: #eef2ff; border-color: #c7d2fe; margin-right: 40px;">
                             <div class="comment-avatar" style="background: var(--primary-color); color: white;">ع</div>
                             <div class="comment-content">
@@ -76,8 +88,16 @@
                                     <span class="comment-date">۱۵ مهر ۱۴۰۲</span>
                                 </div>
                                 <p class="comment-text">سلام محمد عزیز. بله، در پست‌های بعدی یک پروژه وبلاگ با جنگو را قدم به قدم پیاده‌سازی می‌کنیم.</p>
+                                
+                                <!-- Comment Like Area -->
+                                <div class="comment-actions">
+                                    <button class="comment-like-btn">
+                                        <span>❤️</span>
+                                        <span>۵</span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </div> 
                     </div>
                 </section>
                 

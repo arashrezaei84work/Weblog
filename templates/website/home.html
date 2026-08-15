@@ -18,7 +18,6 @@
             <div class="main-feed">
                 <h2 class="section-title">تازه‌ترین مقالات</h2>
                 <div class="post-grid">
-                    <!-- کارت مقاله -->
                     {% for post in posts %}
                     <article class="card">
                         <img src="{{post.image.url}}" alt="post" class="card-img">
@@ -27,21 +26,30 @@
                                 {% for cat in post.category.all %}
                                 <span class="card-category">{{cat.name}}</span>{% if not forloop.last %},{% endif %}
                                 {% endfor %}
-                                <span><a href="author.html">✍️ {{post.author}}</a></span>
+                                <span><a href="{% url "accounts:author" %}">✍️ {{post.author.get_full_name}}</a></span>
                             </div>
                             <h3 class="card-title"><a href="{% url  'blog:single' post.slug %}">{{post.title}}</a></h3>
                             <p class="card-excerpt">{{post.content|truncatechars:35}}</p>
                             <div class="card-footer">
-                                <span>{{post.published_date|date:'M d Y'}}</span>
+                                <!-- Grouping date and like count together -->
+                                <div class="footer-info">
+                                    <span>{{post.published_date|date:'M d Y'}}</span>
+                                    
+                                    <!-- Like count display -->
+                                    <span class="card-like-count">
+                                        <span class="heart-icon">❤️</span> 
+                                        <span>۱۲</span> 
+                                    </span>
+                                </div>
+                                
                                 <a href="{% url  'blog:single' post.slug  %}" class="read-more">ادامه مطلب ←</a>
-                        </div>
+                            </div>
+
                         </div>
                     </article>
                     {% empty %}
                     <p style="color: var(--text-muted);">هنوز مقاله‌ای منتشر نشده است.</p>
                     {% endfor %}
-
-
                 </div>
             </div>
 

@@ -330,3 +330,76 @@ img { max-width: 100%; height: auto; display: block; }
         gap: 20px;
     }
 }
+
+
+/* Post like button styling */
+.post-like-wrapper {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.post-like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fee2e2;
+    color: #ef4444;
+    border: 1px solid #fca5a5;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.post-like-btn:hover {
+    background-color: #fecaca;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Comment like button styling */
+.comment-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.comment-like-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+    padding: 0;
+}
+
+.comment-like-btn:hover,
+.comment-like-btn.liked {
+    color: #ef4444;
+}
+
+/* Wrapper to group date and likes in card footer */
+.footer-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Like count style for blog cards */
+.card-like-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-muted);
+}
+
+/* Heart icon color */
+.card-like-count .heart-icon {
+    color: #ef4444;
+}
