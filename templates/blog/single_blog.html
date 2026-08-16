@@ -17,7 +17,7 @@
                         <span><a href="{% url "accounts:author" %}" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author.get_full_name}}</a></span>
                         <span>📅{{post.published_date|date:"M d Y"}}</span>
                         <span>👁️ {{post.post_view}}</span>
-                        <span>💬 ۳ دیدگاه</span>
+                        <span>💬 {{comments|length}} دیدگاه</span>
                         <button class="post-like-btn" id="post-like">
                             <span>❤️</span>
                             <span>۲</span>
@@ -33,41 +33,52 @@
 
                 <!-- بخش نظرات -->
                 <section class="comments-section">
-                    <h3>نظرات کاربران (۳)</h3>
+                    <h3>نظرات کاربران ({{comments|length}})</h3>
                     
                     <!-- فرم ثبت نظر -->
                     <div class="comment-form">
                         <h4 style="margin-bottom: 15px;">دیدگاه خود را بنویسید</h4>
-                        <form action="#" method="POST">
+                        <form action="{% url "blog:single" slug=post.slug %}" method="POST">
+                        {% csrf_token %}
+                            <input type="hidden" name="post_id" value="{{post.id}}">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label>نام شما</label>
-                                    <input type="text" class="form-control" required>
+                                    <input type="text" name="name" class="form-control" required>
                                 </div>
                                 <div class="form-group">
                                     <label>ایمیل</label>
-                                    <input type="email" class="form-control" required>
+                                    <input type="email" name="email" class="form-control" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>متن دیدگاه</label>
-                                <textarea rows="4" class="form-control" required></textarea>
+                                <textarea rows="4" name="message" class="form-control" required></textarea>
                             </div>
                             <button type="submit" class="btn">ارسال دیدگاه</button>
                         </form>
+								{% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+										<li{% if message.tags %} style="color:gold;" class="{{ message.tags|capfirst }}"{% endif %}>{{ message }}</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+
                     </div>
 
                     <!-- لیست نظرات -->
                     <div class="comments-list">
                         <!-- کامنت اول -->
+                         {% for comment in comments %}
                         <div class="comment-box">
-                            <div class="comment-avatar">م</div>
+                            <div class="comment-avatar"><small>user</small></div>
                             <div class="comment-content">
                                 <div class="comment-header">
-                                    <span class="comment-author">محمد امیری</span>
-                                    <span class="comment-date">۱۴ مهر ۱۴۰۲</span>
+                                    <span class="comment-author"> {{ comment.name }}</span>
+                                    <span class="comment-date">{{comment.created_date}}</span>
                                 </div>
-                                <p class="comment-text">مقاله بسیار عالی و مفیدی بود. آیا در ادامه آموزش پروژه محور هم قرار می‌دهید؟</p>
+                                <p class="comment-text">{{comment.message}}</p>
                                 
                                 <!-- Comment Like Area -->
                                 <div class="comment-actions">
@@ -78,8 +89,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Second Comment (Author Reply) -->
+                        {% endfor %}
+                        <!-- Second Comment (Author Reply) 
                         <div class="comment-box" style="background: #eef2ff; border-color: #c7d2fe; margin-right: 40px;">
                             <div class="comment-avatar" style="background: var(--primary-color); color: white;">ع</div>
                             <div class="comment-content">
@@ -89,7 +100,7 @@
                                 </div>
                                 <p class="comment-text">سلام محمد عزیز. بله، در پست‌های بعدی یک پروژه وبلاگ با جنگو را قدم به قدم پیاده‌سازی می‌کنیم.</p>
                                 
-                                <!-- Comment Like Area -->
+                                
                                 <div class="comment-actions">
                                     <button class="comment-like-btn">
                                         <span>❤️</span>
@@ -97,7 +108,8 @@
                                     </button>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
+                        --> 
                     </div>
                 </section>
                 

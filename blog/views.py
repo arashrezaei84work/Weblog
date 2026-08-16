@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post, Category
+from blog.models import Post, Category, Comment
 from django.contrib.auth.decorators import login_required
+from blog.forms import CommentForm
+from django.contrib import messages
+
 # Create your views here.
 @login_required
 def blog_view(request,**kwargs):
@@ -12,10 +15,23 @@ def blog_view(request,**kwargs):
 
 @login_required
 def single_view(request,slug):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            messages.add_message(request,messages.SUCCESS,'کامنت شما ثبت شد.')
+            form.save()
+        else:
+            messages.add_message(request,messages.ERROR,'کامنت ثبت نشد درخواست خود را دوباره بررسی کنید.')
     post = get_object_or_404(Post, slug=slug)
     post.post_view += 1
     post.save()
-    context = {'post':post}
+    comments = Comment.objects.filter(post_id=post.id,approved=1)
+    form = CommentForm()
+    context = {
+        'post':post,
+        'form':form,
+        'comments':comments
+        }
     return render(request, 'blog/single_blog.html',context)
 
 @login_required
@@ -25,6 +41,7 @@ def category_view(request,cat):
     context = {'posts':posts}
     return render(request,'blog/blog.html',context)
 
-def like_view(request,cat):
+def like_view(request,pid):
     pass
+
 

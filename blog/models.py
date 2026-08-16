@@ -40,3 +40,20 @@ class Post(models.Model):
                 slug = f"{base_slug}-{counter}"
             self.slug = slug
         super().save(*args, **kwargs)
+
+class Comment(models.Model):
+    post_id = models.ForeignKey(Post,on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    likes = models.PositiveIntegerField(default=0)
+    approved = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_date']
+
+    def __str__(self):
+        return f"{self.name}-{self.post_id}"
+    
