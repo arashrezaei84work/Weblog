@@ -41,16 +41,21 @@
                         <form action="{% url "blog:single" slug=post.slug %}" method="POST">
                         {% csrf_token %}
                             <input type="hidden" name="post_id" value="{{post.id}}">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>نام شما</label>
-                                    <input type="text" name="name" class="form-control" required>
+                                {% if request.user.is_authenticated %}
+                                <input type="hidden" name="name" value="{{request.user.username}}">
+                                <input type="hidden" name="email" value="{{request.user.email}}">
+                                {% else %}
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>نام شما</label>
+                                        <input type="text" name="name" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>ایمیل</label>
+                                        <input type="email" name="email" class="form-control" required>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>ایمیل</label>
-                                    <input type="email" name="email" class="form-control" required>
-                                </div>
-                            </div>
+                                {% endif %}
                             <div class="form-group">
                                 <label>متن دیدگاه</label>
                                 <textarea rows="4" name="message" class="form-control" required></textarea>
