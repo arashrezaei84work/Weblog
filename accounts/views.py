@@ -33,6 +33,18 @@ def profile_view(request):
 def register_view(request):
     return render(request,'accounts/register.html')
 
+def my_posts(request):
+    return render(request,'accounts/my_posts.html')
+
+
+def my_comments(request):
+    return render(request,'accounts/my_comments.html')
+
+
+def create_post(request):
+    return render(request, 'accounts/create_post.html')
+
+
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)

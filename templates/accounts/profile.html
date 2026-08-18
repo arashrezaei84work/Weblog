@@ -11,8 +11,8 @@
                 
                 <ul class="profile-menu">
                     <li><a href="#" class="active">تنظیمات حساب</a></li>
-                    <li><a href="#">پست های من</a></li>
-                    <li><a href="#">نظرات من</a></li>
+                    <li><a href="{% url "accounts:my_posts" %}">پست های من</a></li>
+                    <li><a href="{% url "accounts:my_comments" %}">نظرات من</a></li>
                     <li><a href="{% url "accounts:logout" %}" class="text-danger">خروج از حساب</a></li>
                 </ul>
             </aside>

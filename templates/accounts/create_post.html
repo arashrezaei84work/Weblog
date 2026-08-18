@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="main-content container">
+    <div class="profile-layout">
+        
+        <!-- سایدبار پروفایل -->
+        <aside class="profile-sidebar">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop" alt="User Avatar" class="profile-avatar">
+            <h3 class="profile-name">علی رضایی</h3>
+            <p class="profile-email">ali.rezaei@example.com</p>
+            
+            <ul class="profile-menu">
+                <li><a href="{% url 'accounts:profile' %}">تنظیمات حساب</a></li>
+                <li><a href="{% url 'accounts:my_posts' %}" class="active">پست‌های من</a></li>
+                <li><a href="{% url 'accounts:my_comments' %}">نظرات من</a></li>
+                <li><a href="{% url 'accounts:logout' %}" class="text-danger">خروج از حساب</a></li>
+            </ul>
+        </aside>
+
+        <!-- محتوای اصلی: فرم ساخت پست -->
+        <section class="profile-content">
+            <h2 style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">افزودن پست جدید</h2>
+
+            <!-- فرم ایجاد پست (enctype برای ارسال فایل عکس الزامی است) -->
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %} <!-- تگ امنیتی جنگو برای فرم‌ها -->
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="id_title">عنوان مقاله</label>
+                        <input type="text" id="id_title" name="title" class="form-control" placeholder="مثلاً: آموزش مقدماتی جنگو..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_category">دسته‌بندی</label>
+                        <select id="id_category" name="category" class="form-control" required>
+                            <option value="">انتخاب کنید...</option>
+                            <option value="1">برنامه‌نویسی</option>
+                            <option value="2">طراحی رابط کاربری</option>
+                            <option value="3">پایتون و جنگو</option>
+                            <option value="4">توسعه فردی</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_cover">تصویر شاخص (کاور مقاله)</label>
+                    <input type="file" id="id_cover" name="cover_image" class="form-control" accept="image/*">
+                    <span class="form-text">بهترین ابعاد برای تصویر ۸۰۰ در ۶۰۰ پیکسل است.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_excerpt">خلاصه مقاله (برای نمایش در کارت مقالات)</label>
+                    <textarea id="id_excerpt" name="excerpt" class="form-control" rows="3" placeholder="یک توضیح کوتاه و جذاب برای مقاله خود بنویسید..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_content">محتوای اصلی مقاله</label>
+                    <textarea id="id_content" name="content" class="form-control" rows="12" placeholder="متن کامل مقاله را اینجا وارد کنید..." required></textarea>
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button type="submit" class="btn">🚀 انتشار مقاله</button>
+                    <a href="{% url 'accounts:my_posts' %}" class="btn" style="background-color: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color);">انصراف</a>
+                </div>
+            </form>
+
+        </section>
+
+    </div>
+</main>
+{% endblock %}
