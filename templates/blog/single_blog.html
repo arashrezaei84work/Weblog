@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load blog_tags %}
+{% load humanize %}
 {% block content %}
     <main class="main-content container">
         <div class="page-with-sidebar">
@@ -16,16 +17,16 @@
                     <div class="post-meta-info">
                         <span><a href="{% url "accounts:author" %}" style="color: var(--primary-color); font-weight: bold;">✍️ نویسنده: {{post.author.get_full_name}}</a></span>
                         <span>📅{{post.published_date|date:"M d Y"}}</span>
-                        <span>👁️ {{post.post_view}}</span>
+                        <span>بازدیدها: {{post.post_view}}👁️ </span>
                         <span>💬 {{comments|length}} دیدگاه</span>
-                        <button class="post-like-btn" id="post-like">
+                        <a class="post-like-btn" id="post-like" href="#">
                             <span>❤️</span>
                             <span>۲</span>
-                        </button>
+                        </a>
                     </div>
                 </header>
 
-                <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=600&fit=crop" alt="کاور مقاله" class="post-cover">
+                <img src="{{post.image.url}}" alt="کاور مقاله" class="post-cover">
 
                 <div class="post-body">
                     <p>{{post.content}}</p>
@@ -81,7 +82,7 @@
                             <div class="comment-content">
                                 <div class="comment-header">
                                     <span class="comment-author"> {{ comment.name }}</span>
-                                    <span class="comment-date">{{comment.created_date}}</span>
+                                    <span class="comment-date">{{comment.created_date|naturaltime}}</span>
                                 </div>
                                 <p class="comment-text">{{comment.message}}</p>
                                 

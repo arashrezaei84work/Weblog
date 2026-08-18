@@ -403,3 +403,68 @@ img { max-width: 100%; height: auto; display: block; }
 .card-like-count .heart-icon {
     color: #ef4444;
 }
+
+
+/* Paginator */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.page-item {
+    display: inline-block;
+}
+
+.page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--white);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+/* استایل صفحه فعال (صفحه‌ای که کاربر در آن قرار دارد) */
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-md);
+    cursor: default;
+    transform: none;
+}
+
+/* استایل دکمه غیرفعال (مثلاً صفحه قبل وقتی در صفحه اول هستیم) */
+.page-item.disabled .page-link {
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+    border-color: var(--border-color);
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+}
+.page-item.disabled .page-link:hover {
+    background-color: var(--bg-color);
+    color: var(--text-muted);
+}
