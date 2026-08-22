@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <main class="main-content container">
+        <div class="auth-wrapper">
+            <div class="auth-card">
+                <h1>ورود به حساب کاربری</h1>
+                <p class="subtitle">خوش برگشتید! لطفا اطلاعات خود را وارد کنید.</p>
+                
+                <form action="{% url "users:login" %}" method="POST">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label>نام کاربری</label>
+                        <input type="text" name="username" class="form-control" placeholder="username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>رمز عبور</label>
+                        <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                    </div>
+
+                    <div style="text-align: right; margin-bottom: 20px; font-size: 0.85rem;">
+                        <a href="#" style="color: var(--text-muted);">رمز عبور خود را فراموش کرده‌اید؟</a>
+                    </div>
+
+                    <button type="submit" class="btn">ورود</button>
+                </form>
+
+                <div class="auth-links">
+                    حساب کاربری ندارید؟ <a href="{% url "users:register" %}">ثبت‌نام کنید</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

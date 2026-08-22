@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main class="main-content container">
+    <div class="profile-layout">
+        
+        <!-- سایدبار پروفایل -->
+        <aside class="profile-sidebar">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop" alt="User Avatar" class="profile-avatar">
+            <h3 class="profile-name">علی رضایی</h3>
+            <p class="profile-email">ali.rezaei@example.com</p>
+            
+            <ul class="profile-menu">
+                <li><a href="{% url 'users:profile' %}">تنظیمات حساب</a></li>
+                <li><a href="{% url 'users:my_posts' %}">پست‌های من</a></li>
+                <li><a href="{% url 'users:my_comments' %}" class="active">نظرات من</a></li>
+                <li><a href="{% url 'users:logout' %}" class="text-danger">خروج از حساب</a></li>
+            </ul>
+        </aside>
+
+        <!-- محتوای اصلی: نظرات من -->
+        <section class="profile-content">
+            <h2>نظرات من</h2>
+
+            <div class="user-comments-list">
+                <!-- کامنت اول -->
+                <div style="background: var(--bg-color); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 0.9rem; font-weight: bold; color: var(--text-main);">
+                            دیدگاه در مقاله: <a href="#" style="color: var(--primary-color);">شروع کار با جنگو در سال ۲۰۲۴</a>
+                        </span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">۱۴ مهر ۱۴۰۲</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: #4b5563; line-height: 1.7; margin-bottom: 15px;">
+                        مقاله بسیار مفیدی بود، ممنون از توضیح کاملتون. فقط در مورد ORM جنگو هم اگر بخش بعدی بگذارید عالی میشه.
+                    </p>
+                    <div style="text-align: left;">
+                        <a href="#" style="font-size: 0.85rem; color: #dc2626;">حذف نظر</a>
+                    </div>
+                </div>
+
+                <!-- کامنت دوم -->
+                <div style="background: var(--bg-color); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <span style="font-size: 0.9rem; font-weight: bold; color: var(--text-main);">
+                            دیدگاه در مقاله: <a href="#" style="color: var(--primary-color);">۵ اصل مهم در نوشتن کدهای تمیز</a>
+                        </span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">۰۶ مهر ۱۴۰۲</span>
+                    </div>
+                    <p style="font-size: 0.95rem; color: #4b5563; line-height: 1.7; margin-bottom: 15px;">
+                        اصل DRY فوق‌العاده کاربردیه، مرسی بابت نکات خوبی که اشاره کردید.
+                    </p>
+                    <div style="text-align: left;">
+                        <a href="#" style="font-size: 0.85rem; color: #dc2626;">حذف نظر</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+{% endblock %}

@@ -43,8 +43,16 @@ INSTALLED_APPS = [
 
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',
-    'accounts.apps.AccountsConfig',
+    'users.apps.UsersConfig',
+    # 'accounts.apps.AccountsConfig',
 ]
+
+
+
+LOGIN_REDIRECT_URL = '/accounts/users/profile/'
+LOGOUT_REDIRECT_URL = '/'
+
+
 
 SITE_ID = 2
 

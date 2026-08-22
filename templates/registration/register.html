@@ -7,27 +7,33 @@
                 <h1>ثبت‌نام در وبلاگ</h1>
                 <p class="subtitle">به جمع ما بپیوندید و مقالات خود را ذخیره کنید.</p>
                 
-                <form action="#" method="POST">
+                <form action="{% url "users:register" %}" method="POST">
+                {% csrf_token %}
                     <div class="form-group">
                         <label>نام و نام خانوادگی</label>
-                        <input type="text" class="form-control" placeholder="مثال: علی رضایی" required>
+                        <input type="text" name="username" class="form-control" placeholder="مثال: علی رضایی" required>
                     </div>
 
                     <div class="form-group">
                         <label>ایمیل</label>
-                        <input type="email" class="form-control" placeholder="example@mail.com" required>
+                        <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>
                     </div>
 
                     <div class="form-group">
                         <label>رمز عبور</label>
-                        <input type="password" class="form-control" placeholder="حداقل ۸ کاراکتر" required>
+                        <input type="password" name="password1" class="form-control" placeholder="حداقل ۸ کاراکتر" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>تکرار رمز عبور</label>
+                        <input type="password" name="password2" class="form-control" placeholder="حداقل ۸ کاراکتر" required>
                     </div>
 
                     <button type="submit" class="btn">ایجاد حساب کاربری</button>
                 </form>
 
                 <div class="auth-links">
-                    قبلاً ثبت‌نام کرده‌اید؟ <a href="{% url "accounts:login" %}">وارد شوید</a>
+                    قبلاً ثبت‌نام کرده‌اید؟ <a href="{% url "users:login" %}">وارد شوید</a>
                 </div>
             </div>
         </div>
