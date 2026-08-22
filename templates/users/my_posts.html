@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load humanize %}
 {% block content %}
 <main class="main-content container">
     <div class="profile-layout">
@@ -8,8 +8,8 @@
         <!-- سایدبار پروفایل -->
         <aside class="profile-sidebar">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop" alt="User Avatar" class="profile-avatar">
-            <h3 class="profile-name">علی رضایی</h3>
-            <p class="profile-email">ali.rezaei@example.com</p>
+            <h3 class="profile-name">{{request.user.get_full_name}}</h3>
+            <p class="profile-email">{{request.user.email}}</p>
             
             <ul class="profile-menu">
                 <li><a href="{% url 'users:profile' %}">تنظیمات حساب</a></li>
@@ -32,38 +32,26 @@
             <!-- جدول / لیست پست‌ها -->
             <div class="user-posts-list">
                 <!-- نمونه پست اول -->
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px dashed var(--border-color);">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=100&h=70&fit=crop" alt="post" style="border-radius: 8px; width: 80px; height: 55px; object-fit: cover;">
-                        <div>
-                            <h4 style="margin-bottom: 5px; font-size: 1rem;">
-                                <a href="#" style="color: var(--text-main);">شروع کار با جنگو در سال ۲۰۲۴</a>
-                            </h4>
-                            <span style="font-size: 0.85rem; color: var(--text-muted);">تاریخ: ۱۲ مهر ۱۴۰۲ | بازدید: ۱۲۴</span>
+                 {% for post in posts %}
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px dashed var(--border-color);">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="{{post.image.url}}" alt="post" style="border-radius: 8px; max-width: 80px; max-height: 55px; object-fit: cover;">
+                            <div>
+                                <h4 style="margin-bottom: 5px; font-size: 1rem;">
+                                    <a href="{% url "blog:single" slug=post.slug %}" style="color: var(--text-main);">{{post.title}}</a>
+                                </h4>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">{{post.published_date|naturaltime}} | بازدید: {{post.post_view}}</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="#" class="btn-sm" style="background: #eef2ff; color: var(--primary-color); border-radius: 6px;">ویرایش</a>
+                            <a href="#" class="btn-sm" style="background: #fef2f2; color: #dc2626; border-radius: 6px;">حذف</a>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="#" class="btn-sm" style="background: #eef2ff; color: var(--primary-color); border-radius: 6px;">ویرایش</a>
-                        <a href="#" class="btn-sm" style="background: #fef2f2; color: #dc2626; border-radius: 6px;">حذف</a>
-                    </div>
-                </div>
+
+                 {% endfor %}
 
                 <!-- نمونه پست دوم -->
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px dashed var(--border-color);">
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=100&h=70&fit=crop" alt="post" style="border-radius: 8px; width: 80px; height: 55px; object-fit: cover;">
-                        <div>
-                            <h4 style="margin-bottom: 5px; font-size: 1rem;">
-                                <a href="#" style="color: var(--text-main);">۵ اصل مهم در نوشتن کدهای تمیز</a>
-                            </h4>
-                            <span style="font-size: 0.85rem; color: var(--text-muted);">تاریخ: ۵ مهر ۱۴۰۲ | بازدید: ۸۹</span>
-                        </div>
-                    </div>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="#" class="btn-sm" style="background: #eef2ff; color: var(--primary-color); border-radius: 6px;">ویرایش</a>
-                        <a href="#" class="btn-sm" style="background: #fef2f2; color: #dc2626; border-radius: 6px;">حذف</a>
-                    </div>
-                </div>
             </div>
         </section>
 

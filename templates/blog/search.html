@@ -1,0 +1,8 @@
+{% load static %}
+            <div class="widget search-widget-top">
+                <h3 class="widget-title">جستجو در مقالات</h3>
+                <form action="{% url "blog:search" %}" method="GET" class="search-form-widget">
+                    <input type="text" name="s" placeholder="کلمه کلیدی..." class="search-input" required>
+                    <button type="submit" class="search-submit-btn">🔍</button>
+                </form>
+            </div>

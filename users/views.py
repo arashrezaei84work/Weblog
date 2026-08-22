@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from users.forms import RegisterForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from blog.models import Post, Comment
 # Create your views here.
 
 def register_view(request):
@@ -33,11 +33,14 @@ def profile_view(request):
     return render(request,'users/profile.html')
 
 def my_posts(request):
-    return render(request,'users/my_posts.html')
+    posts = Post.objects.filter(author__username=request.user.username)
+    return render(request,'users/my_posts.html',{'posts':posts})
 
 
 def my_comments(request):
-    return render(request,'users/my_comments.html')
+    # post = Post.objects.filter(status=1)
+    comments = Comment.objects.filter(name=request.user.username,approved=1)
+    return render(request,'users/my_comments.html',{'comments':comments})
 
 
 def create_post(request):

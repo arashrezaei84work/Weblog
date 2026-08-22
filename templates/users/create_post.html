@@ -8,8 +8,8 @@
         <!-- سایدبار پروفایل -->
         <aside class="profile-sidebar">
             <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop" alt="User Avatar" class="profile-avatar">
-            <h3 class="profile-name">علی رضایی</h3>
-            <p class="profile-email">ali.rezaei@example.com</p>
+            <h3 class="profile-name">{{request.user.get_full_name}}</h3>
+            <p class="profile-email">{{request.user.email}}</p>
             
             <ul class="profile-menu">
                 <li><a href="{% url 'users:profile' %}">تنظیمات حساب</a></li>

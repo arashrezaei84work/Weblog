@@ -11,14 +11,8 @@
         <div class="page-with-sidebar page-with-search">
 
             <!-- جستجو: در دسکتاپ بالای سایدبار، در موبایل بالای صفحه -->
-            <div class="widget search-widget-top">
-                <h3 class="widget-title">جستجو در مقالات</h3>
-                <form action="#" method="GET" class="search-form-widget">
-                    <input type="text" name="s" placeholder="کلمه کلیدی..." class="search-input" required>
-                    <button type="submit" class="search-submit-btn">🔍</button>
-                </form>
-            </div>
-
+            {% include "blog/search.html" %}
+            
             <div class="main-feed">
                 <h2 class="section-title">تازه‌ترین مقالات</h2>
                 <div class="post-grid">

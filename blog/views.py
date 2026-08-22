@@ -46,7 +46,22 @@ def category_view(request,cat):
     context = {'posts':posts}
     return render(request,'blog/blog.html',context)
 
+
+def search_view(request):
+    posts = Post.objects.filter(status=1)
+    if request.method == 'GET':
+        if s := request.GET.get('s'):
+            posts = posts.filter(content__contains=s)
+    context = {
+        'posts' : posts
+    }
+    return render(request,'blog/blog.html',context)
+
+
+
+
 def like_view(request,pid):
     post = Post.objects.filter(id=pid)
 
 
+    

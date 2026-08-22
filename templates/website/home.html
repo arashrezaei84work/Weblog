@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load humanize %}
 {% block content %}
     <!-- بخش معرفی درباره وبلاگ -->
     <section class="hero">
@@ -33,7 +33,7 @@
                             <div class="card-footer">
                                 <!-- Grouping date and like count together -->
                                 <div class="footer-info">
-                                    <span>{{post.published_date|date:'M d Y'}}</span>
+                                    <span>{{post.published_date|naturaltime}}</span>
                                     
                                     <!-- Like count display -->
                                     <span class="card-like-count">
