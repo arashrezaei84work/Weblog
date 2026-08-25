@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post, Category, Comment
 from django.contrib.auth.decorators import login_required
 from blog.forms import CommentForm
@@ -9,14 +9,17 @@ from django.core.paginator import Paginator
 # Create your views here.
 @login_required
 def blog_view(request,**kwargs):
+    posts = Post.objects.filter(status=1)
     if kwargs.get('cat') != None:
         posts = posts.filter(category__name=kwargs['cat'])
-    posts = Post.objects.filter(status=1)
     paginator = Paginator(posts,2)
     page_num = request.GET.get('page')
     page_obj = paginator.get_page(page_num)
     context = {'posts':page_obj}
     return render(request, 'blog/blog.html', context)
+
+
+
 
 @login_required
 def single_view(request,slug):
@@ -39,12 +42,19 @@ def single_view(request,slug):
         }
     return render(request, 'blog/single_blog.html',context)
 
+
+
+
+
 @login_required
 def category_view(request,cat):
     posts = Post.objects.filter(status=1)
     posts = posts.filter(category__name=cat)
     context = {'posts':posts}
     return render(request,'blog/blog.html',context)
+
+
+
 
 
 def search_view(request):
@@ -60,8 +70,29 @@ def search_view(request):
 
 
 
-def like_view(request,pid):
-    post = Post.objects.filter(id=pid)
+
+@login_required
+def like_post(request,pid):
+    post = get_object_or_404(Post, id=pid)
+    if request.method == 'POST':
+
+        if request.user in post.likes.all():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+    return redirect('blog:single', slug=post.slug)
 
 
+
+
+@login_required
+def like_comment(request, cid):
+    comment = get_object_or_404(Comment, id=cid)
+    if request.method == 'POST':
+
+        if request.user in comment.likes.all():
+            comment.likes.remove(request.user)
+        else:
+            comment.likes.add(request.user)
+    return redirect('blog:single', slug=comment.post_id.slug)
     

@@ -14,6 +14,6 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentsAdmin(admin.ModelAdmin):
-    list_display = ('name','post_id','likes','approved','created_date')
+    list_display = ('name','post_id','approved','created_date')
     list_filter = ('approved',)
 

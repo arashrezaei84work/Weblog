@@ -20,22 +20,22 @@
             <section class="profile-content">
                 <h2>ویرایش اطلاعات کاربری</h2>
                 
-                <form action="#" method="POST">
+                <form action="{% url "users:profile" %}" method="POST">
+                {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group">
                             <label>نام</label>
-                            <input type="text" class="form-control" value="{{request.user.first_name}}">
+                            <input type="text" name="first_name" class="form-control" value="{{request.user.first_name}}">
                         </div>
                         <div class="form-group">
                             <label>نام خانوادگی</label>
-                            <input type="text" class="form-control" value="{{request.user.last_name}}">
+                            <input type="text" name="last_name" class="form-control" value="{{request.user.last_name}}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>ایمیل</label>
-                        <input type="email" class="form-control" value="{{request.user.email}}" disabled style="background-color: #f3f4f6; color: #9ca3af;">
-                        <span class="form-text">ایمیل قابل تغییر نمی‌باشد.</span>
+                        <input type="email" name="email" class="form-control" placeholder="{{request.user.email}}" value="{{ form.email.value|default:'' }}"  style="background-color: #f3f4f6;">
                     </div>
 
                     <div class="form-group">

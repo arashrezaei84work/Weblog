@@ -19,14 +19,25 @@
                         <span>📅{{post.published_date|date:"M d Y"}}</span>
                         <span>بازدیدها: {{post.post_view}}👁️ </span>
                         <span>💬 {{comments|length}} دیدگاه</span>
-                        <a class="post-like-btn" id="post-like" href="#">
-                            <span>❤️</span>
-                            <span>۲</span>
-                        </a>
+                        <form
+                            action="{% url 'blog:like_post' pid=post.id %}"
+                            method="POST"
+                            style="display: inline;"
+                        >
+                            {% csrf_token %}
+
+                            <button
+                                type="submit"
+                                class="post-like-btn"
+                            >
+                                <span>❤️</span>
+                                <span>{{ post.likes.count }}</span>
+                            </button>
+                        </form>                      
                     </div>
                 </header>
 
-                <img src="{{post.image.url}}" alt="کاور مقاله" class="post-cover">
+                <img style="width:100%;max-height:600px;" src="{{post.image.url}}" alt="کاور مقاله" class="post-cover">
 
                 <div class="post-body">
                     <p>{{post.content}}</p>
@@ -88,10 +99,23 @@
                                 
                                 <!-- Comment Like Area -->
                                 <div class="comment-actions">
-                                    <button class="comment-like-btn">
-                                        <span>❤️</span>
-                                        <span>۲</span>
-                                    </button>
+                                    <form
+                                        action="{% url 'blog:like_comment' cid=comment.id %}"
+                                        method="POST"
+                                        style="display: inline;"
+                                    >
+                                        {% csrf_token %}
+
+                                        <button
+                                            type="submit"
+                                            class="comment-like-btn"
+                                        >
+                                            <span>❤️</span>
+                                            <span>{{ comment.likes.count }}</span>
+                                        </button>
+                                    </form>
+
+
                                 </div>
                             </div>
                         </div>
