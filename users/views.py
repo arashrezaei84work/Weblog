@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from users.forms import RegisterForm
+from users.forms import RegisterForm, CreatePostForm, EditProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Category
 # Create your views here.
 
 def register_view(request):
@@ -13,7 +13,7 @@ def register_view(request):
             if form.is_valid():
                 messages.add_message(request,messages.SUCCESS,'registeration is  successful!')
                 form.save()
-                return redirect('/accounts/login/')
+                return redirect('users:login')
             else:
                 messages.add_message(request,messages.ERROR,'registeration is not successful!')
                 return render(request,'registration/register.html',{'form':form})
@@ -30,11 +30,24 @@ def author_view(request):
 
 @login_required
 def profile_view(request):
-    return render(request,'users/profile.html')
+    if request.method == 'POST' :
+        form = EditProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success( request,'اطلاعات کاربری با موفقیت تغییر کرد.')
+            return redirect('users:profile')
+    else:
+        form = EditProfileForm(instance=request.user)
+
+    return render(request,'users/profile.html',{'form':form})
 
 def my_posts(request):
     posts = Post.objects.filter(author__username=request.user.username)
     return render(request,'users/my_posts.html',{'posts':posts})
+
+def edit_post(request):
+    post = Post.objects.filter(author__username=request.user.username)
+    return render(request,'users/edit_post.html',{'post':post})
 
 
 def my_comments(request):
@@ -44,4 +57,13 @@ def my_comments(request):
 
 
 def create_post(request):
-    return render(request, 'users/create_post.html')
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS,'پست شما با موفقیت ذخیره شد و پس از بررسی مدیران سایت نمایش داده میشود.')
+        else:
+            messages.add_message(request, messages.ERROR, 'در ثبت پست خطایی رخ داد.')
+    category = Category.objects.all()
+    form = CreatePostForm()
+    return render(request, 'users/create_post.html',{'form':form,'category':category})

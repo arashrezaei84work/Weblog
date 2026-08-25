@@ -11,22 +11,46 @@
                 {% csrf_token %}
                     <div class="form-group">
                         <label>نام و نام خانوادگی</label>
-                        <input type="text" name="username" class="form-control" placeholder="مثال: علی رضایی" required>
+                        <input type="text" name="username" value="{{ form.username.value|default:'' }}" class="form-control" placeholder="مثال: علی رضایی" required>
+                        {% if form.username.errors %}
+                            <div class="form-text" style="color: red;">
+                                {{ form.username.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
 
                     <div class="form-group">
                         <label>ایمیل</label>
-                        <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>
+                        <input type="email" name="email" value="{{ form.email.value|default:'' }}" class="form-control" placeholder="example@mail.com" required>
+                        {% if form.email.errors %}
+                            <div class="form-text" style="color: red;">
+                                {{ form.email.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
 
                     <div class="form-group">
                         <label>رمز عبور</label>
                         <input type="password" name="password1" class="form-control" placeholder="حداقل ۸ کاراکتر" required>
+                        {% if form.password1.errors %}
+                            <div class="form-text" style="color: red;">
+                                {{ form.password1.errors }}
+                            </div>
+                        {% endif %}
+
                     </div>
 
                     <div class="form-group">
                         <label>تکرار رمز عبور</label>
                         <input type="password" name="password2" class="form-control" placeholder="حداقل ۸ کاراکتر" required>
+                        {% if form.password2.errors %}
+                        <div class="form-text" style="color: red;">
+                            {{ form.password2.errors }}
+                        </div>
+                        {% endif %}     
+    
                     </div>
 
                     <button type="submit" class="btn">ایجاد حساب کاربری</button>

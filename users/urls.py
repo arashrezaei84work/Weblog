@@ -18,6 +18,7 @@ urlpatterns = [
 
     path('users/profile/my_posts',views.my_posts,name='my_posts'),
     path('users/profile/create_post',views.create_post,name='create_post'),
+    path('users/profile/edit_post',views.edit_post,name='edit_post'),
 
     path('users/profile/my_comments',views.my_comments,name='my_comments'),
 
