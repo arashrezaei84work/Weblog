@@ -2,6 +2,55 @@
 {% load static %}
 
 {% block content %}
+<style>
+    
+.category-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.custom-tag-checkbox {
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+}
+
+
+.custom-tag-checkbox input {
+    display: none;
+}
+
+
+.custom-tag-checkbox .tag-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    background-color: var(--white);
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+
+.custom-tag-checkbox:hover .tag-label {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: #2442a5; 
+}
+
+.custom-tag-checkbox input:checked + .tag-label {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(232, 231, 250, 0.3);
+    transform: translateY(-2px);
+}
+</style>
 <main class="main-content container">
     <div class="profile-layout">
         
@@ -24,47 +73,56 @@
             <h2 style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">تغییر پست</h2>
 
             <!-- فرم ایجاد پست (enctype برای ارسال فایل عکس الزامی است) -->
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{% url "users:edit_post" post_id=post.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %} <!-- تگ امنیتی جنگو برای فرم‌ها -->
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="id_title">عنوان مقاله</label>
-                        <input type="text" id="id_title" name="title" class="form-control" placeholder="{{post.name}}" required>
+                        <input type="text" id="id_title" name="title" class="form-control" placeholder="{{post.title}}" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="id_category">دسته‌بندی ها</label>
-                            <span class="card-category">aaa</span>
-                    </div>
+                        <label>دسته‌بندی‌ها (چند مورد را انتخاب کنید)</label>
+                        
+                        <div class="category-tags-container">
+                            {% for cat in category %}
+                            <label class="custom-tag-checkbox">
+                                <!-- چک‌باکس اصلی مخفی می‌شود اما مقادیر را به درستی به بک‌اند می‌فرستد -->
+                                <input type="checkbox" name="category" value="{{ cat.id }}">
+                                <span class="tag-label">{{ cat.name }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>           
+
+
+                    
                 </div>
 
                 <div class="form-group">
                     <label for="id_cover">(کاور فعلی)</label>
-                    <img src="" alt="post" style="border-radius: 8px; width: 80px; height: 55px; object-fit: cover;">
-
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}"
+                            alt="{{ post.name }}"
+                            style="border-radius: 8px; width: 80px; height: 55px; object-fit: cover;">
+                    {% endif %}
                 </div>
 
 
                 <div class="form-group">
                     <label for="id_cover">تصویر شاخص (کاور مقاله)</label>
-                    <input type="file" id="id_cover" name="cover_image" class="form-control" accept="image/*">
+                    <input type="file" id="id_cover" name="image" class="form-control" accept="image/*">
                     <span class="form-text">بهترین ابعاد برای تصویر ۸۰۰ در ۶۰۰ پیکسل است.</span>
                 </div>
 
                 <div class="form-group">
-                    <label for="id_excerpt">خلاصه مقاله (برای نمایش در کارت مقالات)</label>
-                    <textarea id="id_excerpt" name="excerpt" class="form-control" rows="3" placeholder="یک توضیح کوتاه و جذاب برای مقاله خود بنویسید..." required></textarea>
-                </div>
-
-                <div class="form-group">
                     <label for="id_content">محتوای اصلی مقاله</label>
-                    <textarea id="id_content" name="content" class="form-control" rows="12" placeholder="متن کامل مقاله را اینجا وارد کنید..." required></textarea>
+                    <textarea id="id_content" name="content" class="form-control" rows="12" placeholder="متن کامل مقاله را اینجا وارد کنید..." required>{{post.content}}</textarea>
                 </div>
 
                 <div style="display: flex; gap: 15px; margin-top: 30px;">
                     <button type="submit" class="btn">🚀 انتشار مقاله</button>
-                    <a href="{% url 'users:my_posts' %}" class="btn" style="background-color: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color);">انصراف</a>
                 </div>
             </form>
 

@@ -12,7 +12,7 @@ class RegisterForm(UserCreationForm):
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'category', 'image', 'content', 'author']
+        fields = ['title', 'category', 'image', 'content']
         
 
 class EditProfileForm(forms.ModelForm):

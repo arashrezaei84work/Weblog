@@ -4,6 +4,8 @@ from users.forms import RegisterForm, CreatePostForm, EditProfileForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from blog.models import Post, Comment, Category
+from django.contrib.auth.models import User
+
 # Create your views here.
 
 def register_view(request):
@@ -25,8 +27,17 @@ def register_view(request):
 
 
 @login_required
-def author_view(request):
-    return render(request,'users/author.html')
+def author_view(request, user_id):
+    author = get_object_or_404(User, id=user_id)
+    posts = Post.objects.filter(status=1, author=author)
+    total_views = sum(post.post_view for post in posts)
+    context = {
+        'posts':posts,
+        'author':author,
+        'total_views':total_views
+    }
+    return render(request,'users/author.html',context )
+
 
 @login_required
 def profile_view(request):
@@ -45,9 +56,30 @@ def my_posts(request):
     posts = Post.objects.filter(author__username=request.user.username)
     return render(request,'users/my_posts.html',{'posts':posts})
 
-def edit_post(request):
-    post = Post.objects.filter(author__username=request.user.username)
-    return render(request,'users/edit_post.html',{'post':post})
+
+
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id,author=request.user)
+    if request.method == 'POST':
+        form = CreatePostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            categories = request.POST.getlist('category')
+            post.category.set(categories)
+
+            messages.success(request,'پست شما با موفقیت ویرایش شد.')
+            return redirect('users:my_posts')
+    else:
+        form = CreatePostForm(instance=post)
+    category = Category.objects.all()
+    context = {
+        'post':post,
+        'form':form,
+        'category':category
+    }
+    return render(request,'users/edit_post.html', context)
+
+
 
 
 def my_comments(request):
@@ -57,13 +89,20 @@ def my_comments(request):
 
 
 def create_post(request):
+    category = Category.objects.all()
     if request.method == 'POST':
         form = CreatePostForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS,'پست شما با موفقیت ذخیره شد و پس از بررسی مدیران سایت نمایش داده میشود.')
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            form.save_m2m()   # چون از commit=False استفاده کردیم، دسته‌بندی‌ها (m2m) رو دستی ذخیره کن
+            messages.add_message(request, messages.SUCCESS,
+                'پست شما با موفقیت ذخیره شد و پس از بررسی مدیران سایت نمایش داده می‌شود.')
+            form = CreatePostForm()
         else:
-            messages.add_message(request, messages.ERROR, 'در ثبت پست خطایی رخ داد.')
-    category = Category.objects.all()
-    form = CreatePostForm()
-    return render(request, 'users/create_post.html',{'form':form,'category':category})
+            messages.add_message(request, messages.ERROR,
+                'در ثبت پست خطایی رخ داد. لطفاً فیلدها را بررسی کنید.')
+    else:
+        form = CreatePostForm()
+    return render(request, 'users/create_post.html', {'form': form, 'category': category})

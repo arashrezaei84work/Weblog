@@ -24,7 +24,7 @@
                                 {% for cat in post.category.all %}
                                 <span class="card-category">{{cat.name}}</span>{% if not forloop.last %},{% endif %}
                                 {% endfor %}
-                                <span><a href="{% url "users:author" %}">| ✍️ {{post.author.get_full_name}}</a></span>
+                                <span><a href="{% url "users:author" user_id=post.author.id %}">| ✍️ {{post.author.get_full_name}}</a></span>
                             </div>
                             <h3 class="card-title"><a href="{% url  'blog:single' post.slug %}">{{post.title}}</a></h3>
                             <p class="card-excerpt">{{post.content|truncatechars:35}}</p>

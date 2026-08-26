@@ -3,7 +3,7 @@
 
 {% block content %}
 <style>
-    /* --- استایل تگ‌های انتخاب دسته‌بندی --- */
+    
 .category-tags-container {
     display: flex;
     flex-wrap: wrap;
@@ -17,12 +17,12 @@
     margin: 0;
 }
 
-/* مخفی کردن چک‌باکس پیش‌فرض */
+
 .custom-tag-checkbox input {
     display: none;
 }
 
-/* ظاهر پیش‌فرض تگ‌ها (انتخاب نشده) */
+
 .custom-tag-checkbox .tag-label {
     display: inline-flex;
     align-items: center;
@@ -36,14 +36,13 @@
     transition: all 0.3s ease;
 }
 
-/* افکت هاور هنگام رفتن موس روی تگ */
+
 .custom-tag-checkbox:hover .tag-label {
     border-color: var(--primary-color);
     color: var(--primary-color);
-    background-color: #eef2ff; /* یک هاله ملایم آبی */
+    background-color: #eef2ff; 
 }
 
-/* افکت وقتی کاربر تگ را انتخاب (تیک) می‌کند */
 .custom-tag-checkbox input:checked + .tag-label {
     background-color: var(--primary-color);
     color: var(--white);
@@ -110,9 +109,6 @@
                     <label for="id_content">محتوای اصلی مقاله</label>
                     <textarea id="id_content" name="content" class="form-control" rows="12" placeholder="متن کامل مقاله را اینجا وارد کنید..." required></textarea>
                 </div>
-
-                <input type="hidden" id="id_cover" name="author" value="{{request.user.id}}" class="form-control" accept="image/*">
-
 
                 <div style="display: flex; gap: 15px; margin-top: 30px;">
                     <button type="submit" class="btn">🚀 انتشار مقاله</button>
