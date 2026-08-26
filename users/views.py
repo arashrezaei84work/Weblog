@@ -106,3 +106,10 @@ def create_post(request):
     else:
         form = CreatePostForm()
     return render(request, 'users/create_post.html', {'form': form, 'category': category})
+
+
+@login_required
+def delete_post(request,post_id=None):
+    post_to_delete=Post.objects.get(id=post_id)
+    post_to_delete.delete()
+    return redirect('users:my_posts')
