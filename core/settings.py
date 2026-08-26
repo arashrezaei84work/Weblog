@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'robots',
     # 'accounts.apps.AccountsConfig',
 ]
 
@@ -55,6 +56,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 
 SITE_ID = 2
+
+# robots
+ROBOTS_USE_SITEMAP = True
+ROBOTS_USE_HOST = True
 
 
 MIDDLEWARE = [
