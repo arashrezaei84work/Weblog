@@ -1,0 +1,9 @@
+{% load static %}
+                <div class="widget">
+                    <h3 class="widget-title">محبوب‌ترین مقالات</h3>
+                    <ul class="category-list">
+                        {% for post in posts %}
+                        <li><a href="post/{{post.slug}}" style="font-size: 0.9rem;">{{post.title}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>

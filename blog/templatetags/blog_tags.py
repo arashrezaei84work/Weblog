@@ -17,3 +17,9 @@ def categories():
 def latespost(args=6):
     posts = Post.objects.filter(status=1)[:args]
     return {'posts':posts}
+
+
+@register.inclusion_tag('blog/favorite_posts.html')
+def fav_posts():
+    posts = Post.objects.filter(status=1).order_by('likes')[:6]
+    return {'posts':posts}
