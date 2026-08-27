@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',
     'users.apps.UsersConfig',
+    'panel.apps.PanelConfig',
     'robots',
     'debug_toolbar',
     # 'accounts.apps.AccountsConfig',
@@ -157,3 +159,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
        "127.0.0.1",
 ]
+

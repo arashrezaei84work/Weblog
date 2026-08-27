@@ -1,0 +1,35 @@
+{% extends "panel/base.html" %}
+{% block page_title %}مدیریت نظرات{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="margin-bottom:20px; display:flex; gap:8px;">
+    <a href="?status=" class="btn btn-sm {% if not status_filter %}btn-primary{% else %}btn-ghost{% endif %}">همه</a>
+    <a href="?status=approved" class="btn btn-sm {% if status_filter == 'approved' %}btn-primary{% else %}btn-ghost{% endif %}">تایید‌شده</a>
+    <a href="?status=pending" class="btn btn-sm {% if status_filter == 'pending' %}btn-primary{% else %}btn-ghost{% endif %}">در انتظار</a>
+</div>
+
+<div class="glass-card">
+    <table>
+        <thead><tr><th>نویسنده</th><th>پست</th><th>متن</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+        <tbody>
+            {% for c in comments %}
+            <tr>
+                <td>{{ c.name }}<br><span style="color:var(--text-muted); font-size:0.8rem;">{{ c.email }}</span></td>
+                <td>{{ c.post_id.title|truncatechars:25 }}</td>
+                <td>{{ c.message|truncatechars:60 }}</td>
+                <td>{% if c.approved %}<span class="badge badge-success">تایید‌شده</span>{% else %}<span class="badge badge-warning">در انتظار</span>{% endif %}</td>
+                <td style="display:flex; gap:6px;">
+                    <form method="post" action="{% url 'panel:comment_toggle_approve' c.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm {% if c.approved %}btn-ghost{% else %}btn-primary{% endif %}" type="submit">
+                            {% if c.approved %}لغو تایید{% else %}تایید{% endif %}
+                        </button>
+                    </form>
+                    <a href="{% url 'panel:comment_delete' c.id %}" class="btn btn-danger btn-sm">حذف</a>
+                </td>
+            </tr>
+            {% empty %}<tr><td colspan="5"><p class="empty-state">نظری پیدا نشد</p></td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "panel/base.html" %}
+{% block page_title %}تایید حذف{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="max-width:420px; text-align:center;">
+    <h3>مطمئنی می‌خوای «{{ title }}» رو حذف کنی؟</h3>
+    <p style="color:var(--text-muted);">این عمل قابل بازگشت نیست.</p>
+    <form method="post" style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit">بله، حذف کن</button>
+        <a href="{% url cancel_url %}" class="btn btn-ghost">انصراف</a>
+    </form>
+</div>
+{% endblock %}

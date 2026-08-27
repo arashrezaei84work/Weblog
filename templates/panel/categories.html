@@ -1,0 +1,38 @@
+{% extends "panel/base.html" %}
+{% block page_title %}دسته‌بندی‌ها{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="margin-bottom:20px;">
+    <form method="post" style="display:flex; gap:10px;">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="نام دسته‌بندی جدید..." style="flex:1;">
+        <button class="btn btn-primary" type="submit">افزودن</button>
+    </form>
+</div>
+
+<div class="glass-card">
+    <table>
+        <thead><tr><th>نام</th><th>تعداد پست</th><th>عملیات</th></tr></thead>
+        <tbody>
+            {% for cat in categories %}
+            <tr>
+                <td>
+                    <form method="post" action="{% url 'panel:category_edit' cat.id %}" style="display:flex; gap:8px;">
+                        {% csrf_token %}
+                        <input type="text" name="name" value="{{ cat.name }}">
+                        <button class="btn btn-ghost btn-sm" type="submit">ذخیره</button>
+                    </form>
+                </td>
+                <td>{{ cat.posts_count }}</td>
+                <td>
+                    <form method="post" action="{% url 'panel:category_delete' cat.id %}" onsubmit="return confirm('مطمئنی؟');">
+                        {% csrf_token %}
+                        <button class="btn btn-danger btn-sm" type="submit">حذف</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}<tr><td colspan="3"><p class="empty-state">دسته‌بندی‌ای وجود نداره</p></td></tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

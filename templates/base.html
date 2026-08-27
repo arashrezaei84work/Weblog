@@ -22,6 +22,9 @@
                 <a href="{% url "website:contact" %}">تماس با من</a>
                 {% if request.user.is_authenticated %}
                 <a href="{% url "users:profile" %}" class="btn btn-sm">{{request.user.get_full_name}}</a>
+                {% if request.user.is_staff %}
+                <a style="color:#34d399;" href="{% url "panel:dashboard" %}">پنل ادمین</a>
+                {% endif %}
                 <a style="color:red;" href="{% url "users:logout" %}">خروج</a>
                 {% else %}
                 <a href="{% url "users:login" %}" class="btn btn-sm">ورود / ثبت‌نام</a>

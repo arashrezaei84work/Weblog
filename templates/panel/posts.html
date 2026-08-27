@@ -1,0 +1,47 @@
+{% extends "panel/base.html" %}
+{% block page_title %}مدیریت پست‌ها{% endblock %}
+
+{% block content %}
+<div class="glass-card" style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+    <form method="get" style="display:flex; gap:10px;">
+        <input type="text" name="q" placeholder="جستجوی عنوان..." value="{{ q }}">
+        <button class="btn btn-ghost" type="submit">جستجو</button>
+    </form>
+    <div style="margin-right:auto; display:flex; gap:8px;">
+        <a href="?status=" class="btn btn-sm {% if not status_filter %}btn-primary{% else %}btn-ghost{% endif %}">همه</a>
+        <a href="?status=published" class="btn btn-sm {% if status_filter == 'published' %}btn-primary{% else %}btn-ghost{% endif %}">منتشرشده</a>
+        <a href="?status=pending" class="btn btn-sm {% if status_filter == 'pending' %}btn-primary{% else %}btn-ghost{% endif %}">در انتظار</a>
+    </div>
+</div>
+
+<div class="glass-card">
+    <table>
+        <thead>
+            <tr><th>عنوان</th><th>نویسنده</th><th>بازدید</th><th>وضعیت</th><th>تاریخ</th><th>عملیات</th></tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <td>{{ post.title|truncatechars:40 }}</td>
+                <td>{{ post.author.username|default:"—" }}</td>
+                <td>{{ post.post_view }}</td>
+                <td>{% if post.status %}<span class="badge badge-success">منتشرشده</span>{% else %}<span class="badge badge-warning">در انتظار</span>{% endif %}</td>
+                <td>{{ post.created_date|date:"Y/m/d" }}</td>
+                <td style="display:flex; gap:6px;">
+                    <a href="{{ post.get_absolute_url }}" class="btn btn-ghost btn-sm" target="_blank">مشاهده</a>
+                    <form method="post" action="{% url 'panel:post_toggle_status' post.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm {% if post.status %}btn-ghost{% else %}btn-primary{% endif %}" type="submit">
+                            {% if post.status %}لغو انتشار{% else %}انتشار{% endif %}
+                        </button>
+                    </form>
+                    <a href="{% url 'panel:post_delete' post.id %}" class="btn btn-danger btn-sm">حذف</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="6"><p class="empty-state">پستی پیدا نشد</p></td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

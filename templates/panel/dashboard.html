@@ -1,0 +1,56 @@
+{% extends "panel/base.html" %}
+{% block page_title %}داشبورد{% endblock %}
+
+{% block content %}
+<div class="stats-grid">
+    <div class="glass-card">
+        <div class="stat-value">{{ total_posts }}</div>
+        <div class="stat-label">کل پست‌ها</div>
+    </div>
+    <div class="glass-card">
+        <div class="stat-value" style="color:var(--success);">{{ published_posts }}</div>
+        <div class="stat-label">پست‌های منتشرشده</div>
+    </div>
+    <div class="glass-card">
+        <div class="stat-value" style="color:var(--warning);">{{ pending_posts }}</div>
+        <div class="stat-label">در انتظار تایید</div>
+    </div>
+    <div class="glass-card">
+        <div class="stat-value">{{ total_comments }}</div>
+        <div class="stat-label">کل نظرات</div>
+    </div>
+    <div class="glass-card">
+        <div class="stat-value" style="color:var(--warning);">{{ pending_comments }}</div>
+        <div class="stat-label">نظرات در انتظار تایید</div>
+    </div>
+    <div class="glass-card">
+        <div class="stat-value">{{ total_users }}</div>
+        <div class="stat-label">کاربران</div>
+    </div>
+    <div class="glass-card">
+        <div class="stat-value">{{ total_categories }}</div>
+        <div class="stat-label">دسته‌بندی‌ها</div>
+    </div>
+</div>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div class="glass-card">
+        <h3 style="margin-top:0;">آخرین پست‌ها</h3>
+        {% for post in recent_posts %}
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);">
+            <span>{{ post.title|truncatechars:35 }}</span>
+            {% if post.status %}<span class="badge badge-success">منتشرشده</span>{% else %}<span class="badge badge-warning">در انتظار</span>{% endif %}
+        </div>
+        {% empty %}<p class="empty-state">پستی وجود نداره</p>{% endfor %}
+    </div>
+    <div class="glass-card">
+        <h3 style="margin-top:0;">آخرین نظرات</h3>
+        {% for c in recent_comments %}
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);">
+            <span>{{ c.name }} روی «{{ c.post_id.title|truncatechars:20 }}»</span>
+            {% if c.approved %}<span class="badge badge-success">تایید‌شده</span>{% else %}<span class="badge badge-warning">در انتظار</span>{% endif %}
+        </div>
+        {% empty %}<p class="empty-state">نظری وجود نداره</p>{% endfor %}
+    </div>
+</div>
+{% endblock %}

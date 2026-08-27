@@ -1,0 +1,31 @@
+{% extends "panel/base.html" %}
+{% block page_title %}مدیریت کاربران{% endblock %}
+
+{% block content %}
+<div class="glass-card">
+    <table>
+        <thead><tr><th>نام کاربری</th><th>ایمیل</th><th>تعداد پست</th><th>نقش</th><th>وضعیت</th><th>عملیات</th></tr></thead>
+        <tbody>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.username }}</td>
+                <td>{{ u.email|default:"—" }}</td>
+                <td>{{ u.posts_count }}</td>
+                <td>{% if u.is_staff %}<span class="badge badge-success">ادمین</span>{% else %}<span class="badge">کاربر عادی</span>{% endif %}</td>
+                <td>{% if u.is_active %}<span class="badge badge-success">فعال</span>{% else %}<span class="badge badge-danger">مسدود</span>{% endif %}</td>
+                <td>
+                    {% if u != request.user %}
+                    <form method="post" action="{% url 'panel:user_toggle_active' u.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-sm {% if u.is_active %}btn-danger{% else %}btn-primary{% endif %}" type="submit">
+                            {% if u.is_active %}مسدودسازی{% else %}فعال‌سازی{% endif %}
+                        </button>
+                    </form>
+                    {% else %}<span style="color:var(--text-muted); font-size:0.8rem;">(خودت)</span>{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
