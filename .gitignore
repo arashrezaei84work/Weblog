@@ -160,3 +160,11 @@ cython_debug/
 #.idea/
 
 media/
+
+# Django static files (collectstatic)
+staticfiles/
+staticfiles_build/
+
+# Editors
+.vscode/
+.idea/

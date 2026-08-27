@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 {% block content %}
     <main class="main-content container">
         
@@ -21,6 +22,10 @@
                 <div class="author-stat-item">
                     تاریخ عضویت
                     <span>{{ author.date_joined|date:"Y/m/d" }}</span>
+                </div>
+                <div class="author-stat-item">
+                    آخرین حضور 
+                    <span>{{ author.last_login|naturaltime}}</span>
                 </div>
             </div>
         </section>
