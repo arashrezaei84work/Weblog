@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'jazzmin',
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -56,6 +56,10 @@ INSTALLED_APPS = [
 ]
 
 
+#admin-captcha
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
 
 LOGIN_REDIRECT_URL = '/accounts/users/profile/'
 LOGOUT_REDIRECT_URL = '/'

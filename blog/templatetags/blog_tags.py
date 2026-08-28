@@ -15,7 +15,7 @@ def categories():
 
 @register.inclusion_tag('blog/latespost.html')
 def latespost(args=6):
-    posts = Post.objects.filter(status=1)[:args]
+    posts = Post.objects.filter(status=1).order_by('-published_date')[:args]
     return {'posts':posts}
 
 
