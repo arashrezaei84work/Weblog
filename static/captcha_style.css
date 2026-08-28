@@ -1,0 +1,72 @@
+/* ========================
+   استایل کپچا (django-simple-captcha)
+   ======================== */
+.pb-3 {
+    margin-bottom: 20px;
+}
+
+/* تصویر کپچا */
+.captcha {
+    display: block;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.captcha:hover {
+    box-shadow: var(--shadow-md);
+    transform: scale(1.02);
+}
+
+/* اینپوت کپچا */
+input[name="captcha_1"],
+#id_captcha_1 {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-color);
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-main);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[name="captcha_1"]:focus,
+#id_captcha_1:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* لیبل کپچا */
+label[for="id_captcha_1"] {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+/* چیدمان بهتر */
+.form-group .captcha,
+.pb-3 .captcha {
+    margin-bottom: 12px;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .captcha {
+        max-width: 100%;
+    }
+    
+    input[name="captcha_1"],
+    #id_captcha_1 {
+        font-size: 16px;
+    }
+}

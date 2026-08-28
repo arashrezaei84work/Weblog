@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'captcha',
 
     'website.apps.WebsiteConfig',
     'blog.apps.BlogConfig',

@@ -71,6 +71,9 @@
                             <div class="form-group">
                                 <label>متن دیدگاه</label>
                                 <textarea rows="4" name="message" class="form-control" required></textarea>
+                                <div class="pb-3">
+                                    {{form.captcha}}
+                                </div>
                             </div>
                             <button type="submit" class="btn">ارسال دیدگاه</button>
                         </form>
@@ -105,6 +108,8 @@
                                         style="display: inline;"
                                     >
                                         {% csrf_token %}
+
+
 
                                         <button
                                             type="submit"

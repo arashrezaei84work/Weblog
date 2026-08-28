@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+    
     <main class="main-content container">
         <div class="contact-layout">
             
@@ -44,6 +45,10 @@
                     <div class="form-group">
                         <label>متن پیام</label>
                         <textarea rows="5" name="message" class="form-control" placeholder="پیام خود را اینجا بنویسید..."></textarea>
+                    </div>
+
+                    <div class="pb-3">
+                        {{form.captcha}}
                     </div>
 
                     <button type="submit" class="btn">ارسال پیام</button>

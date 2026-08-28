@@ -34,7 +34,8 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('accounts/', include('users.urls')),
     path('panel/', include('panel.urls')),
-    
+
+    path('captcha/', include('captcha.urls')),
     path('robots.txt', include('robots.urls')),
     path("sitemap.xml/", sitemap,
     {"sitemaps": sitemaps},
