@@ -6,4 +6,4 @@ class CommentForm(forms.ModelForm):
     captcha = CaptchaField()
     class Meta:
         model = Comment
-        fields = ['post_id','name','email', 'message']
+        fields = ['name', 'email', 'message']

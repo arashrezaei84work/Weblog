@@ -1,0 +1,5 @@
+{% load static %}
+<form method="post" action="{% url 'users:delete' post.id %}" onsubmit="return confirm('مطمئنی؟');" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn-sm" style="background:#fef2f2; color:#dc2626; border:none; border-radius:6px;">حذف</button>
+</form>

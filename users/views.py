@@ -52,12 +52,14 @@ def profile_view(request):
 
     return render(request,'users/profile.html',{'form':form})
 
+
+@login_required
 def my_posts(request):
     posts = Post.objects.filter(author__username=request.user.username)
     return render(request,'users/my_posts.html',{'posts':posts})
 
 
-
+@login_required
 def edit_post(request, post_id):
     post = get_object_or_404(Post, id=post_id,author=request.user)
     if request.method == 'POST':
@@ -82,12 +84,14 @@ def edit_post(request, post_id):
 
 
 
+@login_required
 def my_comments(request):
-    # post = Post.objects.filter(status=1)
     comments = Comment.objects.filter(name=request.user.username,approved=1)
     return render(request,'users/my_comments.html',{'comments':comments})
 
 
+
+@login_required
 def create_post(request):
     category = Category.objects.all()
     if request.method == 'POST':
@@ -109,7 +113,10 @@ def create_post(request):
 
 
 @login_required
-def delete_post(request,post_id=None):
-    post_to_delete=Post.objects.get(id=post_id)
-    post_to_delete.delete()
-    return redirect('users:my_posts')
+def delete_post(request, post_id=None):
+    post = get_object_or_404(Post, id=post_id, author=request.user)  
+    if request.method == 'POST':
+        post.delete()
+        messages.success(request, 'پست حذف شد.')
+        return redirect('users:my_posts')
+    return render(request, 'users/confirm_delete.html', {'post': post})

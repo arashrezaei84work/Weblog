@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 # Create your views here.
-@login_required
+
 def blog_view(request,**kwargs):
     posts = Post.objects.filter(status=1)
     if kwargs.get('cat') != None:
@@ -21,16 +21,17 @@ def blog_view(request,**kwargs):
 
 
 
-@login_required
 def single_view(request,slug):
+    post = get_object_or_404(Post, slug=slug)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             messages.add_message(request,messages.SUCCESS,'کامنت شما ثبت شد و بعد از تایید توسط ادمین سایت نمایش داده میشود.')
-            form.save()
+            comment = form.save(commit=False)
+            comment.post_id = post
+            comment.save()
         else:
             messages.add_message(request,messages.ERROR,'کامنت ثبت نشد درخواست خود را دوباره بررسی کنید.')
-    post = get_object_or_404(Post, slug=slug)
     post.post_view += 1
     post.save()
     comments = Comment.objects.filter(post_id=post.id,approved=1)
@@ -46,7 +47,6 @@ def single_view(request,slug):
 
 
 
-@login_required
 def category_view(request,cat):
     posts = Post.objects.filter(status=1)
     posts = posts.filter(category__name=cat)
