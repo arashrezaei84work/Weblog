@@ -1,0 +1,75 @@
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .split-layout, .contact-layout, .profile-layout, .form-row { flex-direction: column; }
+    .contact-sidebar, .contact-form-area, .profile-sidebar { width: 100%; }
+    .hero h1 { font-size: 2rem; }
+    .sidebar { width: 100%; position: static; }
+}
+
+@media (max-width: 768px) {
+    .navbar .container { position: relative; flex-wrap: wrap; }
+    .mobile-menu-btn { display: block; }
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--white);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 20px;
+        box-shadow: var(--shadow-md);
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        gap: 15px;
+        text-align: center;
+    }
+    .nav-links.active { display: flex; }
+}
+
+@media (max-width: 768px) {
+    .page-with-sidebar.page-with-search {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "search"
+            "main"
+            "sidebar";
+        gap: 20px;
+    }
+    .profile-layout {
+        margin: 0 -10px;
+        gap: 0;
+    }
+
+    .profile-sidebar,
+    .profile-content {
+        width: 100%;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: 8px solid var(--bg-color); /* یه جداکننده‌ی نازک به‌جای gap */
+    }
+
+    .profile-sidebar { padding: 24px 24px; }
+    .profile-avatar { width: 90px; height: 90px; }
+
+    .profile-content { padding: 24px 24px; }
+    .profile-content h2 { font-size: 1.2rem; margin-bottom: 18px; padding-bottom: 12px; }
+
+    .form-row { flex-direction: column; gap: 0; }
+    .form-row .form-group { margin-bottom: 18px; }
+
+    .profile-content form .btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1rem;
+        margin-top: 6px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .profile-content textarea.form-control { min-height: 90px; }
+    .profile-content h2 { font-size: 1.1rem; }
+}

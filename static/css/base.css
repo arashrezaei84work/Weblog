@@ -1,0 +1,81 @@
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --bg-color: #f9fafb;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --white: #ffffff;
+    --border-color: #e5e7eb;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { overflow-x: hidden; }
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+img { max-width: 100%; height: auto; display: block; }
+.container { max-width: 1200px; width: 100%; margin: 0 auto; padding: 0 20px; }
+.main-content { flex-grow: 1; padding: 40px 0; }
+.page-header { text-align: center; margin-bottom: 40px; }
+
+/* دکمه‌ها */
+.btn {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: center;
+}
+.btn:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
+.btn-sm { padding: 8px 16px; font-size: 0.9rem; }
+
+.btn-download-resume {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #4f46e5;
+    color: #ffffff;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2);
+}
+
+/* نوار ناوبری */
+.navbar { background-color: var(--white); border-bottom: 1px solid var(--border-color); padding: 15px 0; }
+.navbar .container { display: flex; justify-content: space-between; align-items: center; }
+.navbar .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary-color); }
+.nav-links { display: flex; align-items: center; gap: 24px; font-weight: 500; color: var(--text-muted); }
+.nav-links a:hover { color: var(--primary-color); }
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+/* فوتر */
+.footer { background: #111827; color: #9ca3af; text-align: center; padding: 30px 0; margin-top: auto; }

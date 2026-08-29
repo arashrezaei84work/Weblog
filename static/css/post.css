@@ -1,0 +1,70 @@
+/* صفحه‌ی تکی مقاله */
+.single-post { background: var(--white); padding: 40px; border-radius: 20px; border: 1px solid var(--border-color); max-width: 800px; margin: 0 auto; }
+.post-header { text-align: center; margin-bottom: 30px; }
+.tag-badge { background: #eef2ff; color: var(--primary-color); padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+.post-header h1 { font-size: 2.2rem; margin: 15px 0; line-height: 1.4; }
+.post-meta { display: flex; justify-content: center; gap: 20px; color: var(--text-muted); font-size: 0.9rem; }
+.post-cover { width: 100%; border-radius: 12px; margin-bottom: 30px; }
+.post-body { font-size: 1.1rem; line-height: 2; color: #374151; }
+.post-body h3 { font-size: 1.5rem; margin: 30px 0 15px; color: var(--text-main); }
+.post-body p { margin-bottom: 20px; }
+.post-body blockquote { background: #eef2ff; border-right: 4px solid var(--primary-color); padding: 20px; margin: 20px 0; font-style: italic; border-radius: 8px 0 0 8px; }
+.post-meta-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; color: #6b7280; font-size: 0.95rem; margin-top: 15px; }
+.post-meta-info span { display: flex; align-items: center; gap: 5px; }
+
+/* لایک پست */
+.post-like-wrapper { text-align: center; margin-top: 25px; }
+.post-like-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #fee2e2;
+    color: #ef4444;
+    border: 1px solid #fca5a5;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+.post-like-btn:hover { background-color: #fecaca; transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+
+/* دکمه‌ی ذخیره‌ی مقاله */
+.save-article-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+.save-article-btn:hover, .save-article-btn.saved { color: #e11d48; }
+
+/* بخش کامنت‌ها */
+.comments-section { margin-top: 50px; border-top: 1px solid #e5e7eb; padding-top: 40px; }
+.comment-form { background: #f9fafb; padding: 25px; border-radius: 16px; border: 1px solid #e5e7eb; margin-bottom: 40px; }
+.comment-box { display: flex; gap: 15px; margin-bottom: 25px; border-bottom: 1px solid #e5e7eb; padding-bottom: 25px; }
+.comment-box:last-child { border-bottom: none; }
+.comment-avatar { width: 50px; height: 50px; border-radius: 50%; background: #eef2ff; color: #4f46e5; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; font-weight: bold; }
+.comment-content { flex-grow: 1; }
+.comment-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+.comment-author { font-weight: bold; color: #1f2937; }
+.comment-date { font-size: 0.85rem; color: #6b7280; }
+.comment-actions { display: flex; align-items: center; margin-top: 10px; }
+.comment-like-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+    padding: 0;
+}
+.comment-like-btn:hover, .comment-like-btn.liked { color: #ef4444; }
