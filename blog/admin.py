@@ -10,7 +10,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title','author','post_view','status')
     list_filter = ('status',)
-    search_fields = ('title','author','content')
+    search_fields = ('title','author__username','content')
 
 @admin.register(Comment)
 class CommentsAdmin(admin.ModelAdmin):
