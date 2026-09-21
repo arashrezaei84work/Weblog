@@ -22,7 +22,7 @@ urlpatterns = [
 
     path('users/profile/my_comments',views.my_comments,name='my_comments'),
 
-    path('users/profile/my_posts/delete/<post_id>',views.delete_post,name='delete')
+    path('users/profile/my_posts/delete/<int:post_id>',views.delete_post,name='delete')
 
 
 ]
