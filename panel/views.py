@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Count, Q
-
+from django.views.decorators.http import require_POST
 from blog.models import Post, Comment, Category
 
 
@@ -129,6 +129,7 @@ def category_list(request):
 
 
 @staff_member_required
+@require_POST
 def category_edit(request, category_id):
     category = get_object_or_404(Category, id=category_id)
     if request.method == 'POST':
