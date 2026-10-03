@@ -10,7 +10,7 @@ def categories():
     cats = Category.objects.all()
     cat_dict = {}
     for name in cats:
-        cat_dict[name] = post.filter(category=name).count
+        cat_dict[name] = post.filter(category=name).count()
     return {'cats' : cat_dict}
 
 @register.inclusion_tag('blog/latespost.html')
