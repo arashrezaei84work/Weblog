@@ -7,8 +7,8 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
 
     path('posts/', views.post_list, name='posts'),
-    path('posts/<int:post_id>/toggle/', views.post_toggle_status, name='post_toggle_status'),
-    path('posts/<int:post_id>/delete/', views.post_delete, name='post_delete'),
+    path('posts/<int:post>/toggle/', views.post_toggle_status, name='post_toggle_status'),
+    path('posts/<int:post>/delete/', views.post_delete, name='post_delete'),
 
     path('comments/', views.comment_list, name='comments'),
     path('comments/<int:comment_id>/toggle/', views.comment_toggle_approve, name='comment_toggle_approve'),

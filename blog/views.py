@@ -68,7 +68,7 @@ def search_view(request):
     posts = Post.objects.filter(status=1)
     if request.method == 'GET':
         if s := request.GET.get('s'):
-            posts = posts.filter(Q(content__contains=s) | Q(title__contains=s))
+            posts = posts.filter(Q(content__icontains=s) | Q(title__icontains=s))
     context = {
         'posts' : posts
     }
