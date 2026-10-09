@@ -47,7 +47,7 @@
         <h3 style="margin-top:0;">آخرین نظرات</h3>
         {% for c in recent_comments %}
         <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.06);">
-            <span>{{ c.name }} روی «{{ c.post_id.title|truncatechars:20 }}»</span>
+            <span>{{ c.name }} روی «{{ c.post.title|truncatechars:20 }}»</span>
             {% if c.approved %}<span class="badge badge-success">تایید‌شده</span>{% else %}<span class="badge badge-warning">در انتظار</span>{% endif %}
         </div>
         {% empty %}<p class="empty-state">نظری وجود نداره</p>{% endfor %}

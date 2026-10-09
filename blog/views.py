@@ -30,13 +30,13 @@ def single_view(request,slug):
         if form.is_valid():
             messages.add_message(request,messages.SUCCESS,'کامنت شما ثبت شد و بعد از تایید توسط ادمین سایت نمایش داده میشود.')
             comment = form.save(commit=False)
-            comment.post_id = post
+            comment.post = post
             comment.save()
         else:
             messages.add_message(request,messages.ERROR,'کامنت ثبت نشد درخواست خود را دوباره بررسی کنید.')
     post.post_view += 1
     post.save()
-    comments = Comment.objects.filter(post_id=post.id,approved=1)
+    comments = Comment.objects.filter(post=post.id,approved=1)
     form = CommentForm()
     context = {
         'post':post,
@@ -101,5 +101,5 @@ def like_comment(request, cid):
             comment.likes.remove(request.user)
         else:
             comment.likes.add(request.user)
-    return redirect('blog:single', slug=comment.post_id.slug)
+    return redirect('blog:single', slug=comment.post.slug)
     

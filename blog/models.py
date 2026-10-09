@@ -52,7 +52,7 @@ class Post(models.Model):
         return reverse('blog:single', kwargs={'slug':self.slug})
     
 class Comment(models.Model):
-    post_id = models.ForeignKey(Post,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     email = models.EmailField()
     message = models.TextField()
@@ -65,5 +65,5 @@ class Comment(models.Model):
         ordering = ['-created_date']
 
     def __str__(self):
-        return f"{self.name}-{self.post_id}"
+        return f"{self.name}-{self.post}"
 

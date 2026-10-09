@@ -18,7 +18,7 @@ def dashboard(request):
         'total_users': User.objects.count(),
         'total_categories': Category.objects.count(),
         'recent_posts': Post.objects.select_related('author').order_by('-created_date')[:5],
-        'recent_comments': Comment.objects.select_related('post_id').order_by('-created_date')[:5],
+        'recent_comments': Comment.objects.select_related('post').order_by('-created_date')[:5],
     }
     return render(request, 'panel/dashboard.html', context)
 
@@ -42,8 +42,8 @@ def post_list(request):
 
 
 @staff_member_required
-def post_toggle_status(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def post_toggle_status(request, post):
+    post = get_object_or_404(Post, id=post)
     post.status = not post.status
     post.save()
     messages.success(request, f'وضعیت پست «{post.title}» تغییر کرد.')
@@ -51,8 +51,8 @@ def post_toggle_status(request, post_id):
 
 
 @staff_member_required
-def post_delete(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def post_delete(request, post):
+    post = get_object_or_404(Post, id=post)
     if request.method == 'POST':
         post.delete()
         messages.success(request, 'پست حذف شد.')
@@ -65,7 +65,7 @@ def post_delete(request, post_id):
 @staff_member_required
 def comment_list(request):
     status_filter = request.GET.get('status', '')
-    comments = Comment.objects.select_related('post_id').all()
+    comments = Comment.objects.select_related('post').all()
     if status_filter == 'approved':
         comments = comments.filter(approved=True)
     elif status_filter == 'pending':
