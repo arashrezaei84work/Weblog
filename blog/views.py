@@ -5,6 +5,8 @@ from blog.forms import CommentForm
 from django.contrib import messages
 from django.core.paginator import Paginator
 
+from django.db.models import Q
+
 
 # Create your views here.
 
@@ -50,7 +52,12 @@ def single_view(request,slug):
 def category_view(request,cat):
     posts = Post.objects.filter(status=1)
     posts = posts.filter(category__name=cat)
-    context = {'posts':posts}
+
+    paginator = Paginator(posts,2)
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
+
+    context = {'posts':page_obj}
     return render(request,'blog/blog.html',context)
 
 
@@ -61,7 +68,7 @@ def search_view(request):
     posts = Post.objects.filter(status=1)
     if request.method == 'GET':
         if s := request.GET.get('s'):
-            posts = posts.filter(content__contains=s)
+            posts = posts.filter(Q(content__contains=s) | Q(title__contains=s))
     context = {
         'posts' : posts
     }
